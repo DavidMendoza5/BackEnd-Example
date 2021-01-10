@@ -20,3 +20,8 @@ Running on development
 ```
 npm run dev
 ```
+
+Running tests with seeders
+```
+npm run seed
+```
