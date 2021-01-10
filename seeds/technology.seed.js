@@ -1,3 +1,17 @@
+const mongoose = require('mongoose')
+const { DATABASE } = require('../config')
+const { Technology } = require('../models')
+
+// Conexión a la base de datos
+mongoose.connect(DATABASE, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true}, (err, res) => {
+  if(err) {
+    throw err
+  } else {
+    console.log(`Database connected on ${DATABASE}`)
+  }
+})
+
+// Datos que usaremos para testear
 const technologies = [
     {
       name: "Node.js",
@@ -78,3 +92,8 @@ const technologies = [
     }
   ]
   
+// El método create devuelve una promesa, por eso se usa el then y el catch
+Technology.create(technologies).then(() => {
+  console.log("Technologies created")
+  mongoose.disconnect() // Nos desconectamos de la base de datos después de haber creado los datos
+}).catch(console.log)
